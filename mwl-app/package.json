@@ -1,0 +1,9 @@
+{
+  "name": "mwl-app",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "bun --cwd mwl-frontend dev",
+    "build:frontend": "bun --cwd mwl-frontend build",
+    "dev:backend": "bun --cwd mwl-backend dev"
+  }
+}
