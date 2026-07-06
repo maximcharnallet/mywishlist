@@ -5,5 +5,8 @@
     "dev:frontend": "bun --cwd mwl-frontend dev",
     "build:frontend": "bun --cwd mwl-frontend build",
     "dev:backend": "bun --cwd mwl-backend dev"
+  },
+  "dependencies": {
+    "@fastify/jwt": "^10.1.0"
   }
 }
