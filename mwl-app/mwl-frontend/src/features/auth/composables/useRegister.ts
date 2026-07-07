@@ -4,32 +4,31 @@ import { register } from '@/features/auth/services/register.service'
 
 export function useRegister () {
   const router = useRouter()
-  const isError = ref(false)
-  const errorMessage = ref('')
-  const isLoading = ref(false)
+  const isErrorRegister = ref(false)
+  const errorMessageRegister = ref('')
+  const isLoadingRegister = ref(false)
 
   async function doRegister (name: string, email: string, password: string, passwordConfirm: string) {
     if (!name.trim() || !email.trim() || !password.trim()) {
-      isError.value = true
-      errorMessage.value = 'Veuillez remplir tous les champs'
+      isErrorRegister.value = true
+      errorMessageRegister.value = 'Veuillez remplir tous les champs'
       return
     }
-    console.log({name, email, password, passwordConfirm})
-    isLoading.value = true
+    isLoadingRegister.value = true
     try {
       await register(name, email, password, passwordConfirm)
       router.push('/login')
     } catch (error: any) {
-      isError.value = true
-      errorMessage.value = error.message
+      isErrorRegister.value = true
+      errorMessageRegister.value = error.message
     } finally {
-      isLoading.value = false
+      isLoadingRegister.value = false
     }
   }
   return {
     doRegister,
-    isError,
-    errorMessage,
-    isLoading,
+    isErrorRegister,
+    errorMessageRegister,
+    isLoadingRegister,
   }
 }

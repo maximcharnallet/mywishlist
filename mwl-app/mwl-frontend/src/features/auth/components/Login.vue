@@ -5,11 +5,11 @@
   import { storeToRefs } from 'pinia'
 
   const store = authStore()
-  const { name, email, password, passwordConfirm } = storeToRefs(store)
+  const { email, password} = storeToRefs(store)
   const { doSignin } = useSignin()
 
   async function handleSignin(){
-    doSignin(email.value, password.value)
+    await doSignin(email.value, password.value)
   }
 
   function toRegister() {
@@ -26,8 +26,8 @@
       <v-card-title class="text-center">Connexion</v-card-title>
       <v-card-text>
           <v-text-field v-model="email" label="Email" type="email" required></v-text-field>
-          <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
-          <v-btn color="primary" class="mt-4" block>Se connecter</v-btn>
+          <v-text-field v-model="password" label="Mot de passe" type="password" required></v-text-field>
+          <v-btn color="primary" class="mt-4" block @click="handleSignin">Se connecter</v-btn>
           <v-btn color="primary" class="mt-2" block @click="toRegister">S'enregistrer</v-btn>
       </v-card-text>
     </v-card>

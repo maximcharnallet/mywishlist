@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useRegister } from '../composables/useRegister'
+import { useSignin } from '../composables/useSignin'
 
 export const authStore = defineStore('auth', () => {
   
@@ -9,7 +10,9 @@ export const authStore = defineStore('auth', () => {
   const password = ref('')
   const passwordConfirm = ref('')
 
-  const { isError, errorMessage, isLoading, doRegister } = useRegister()
+  const { isErrorRegister, errorMessageRegister, isLoadingRegister, doRegister } = useRegister()
+
+  const { isErrorAuth, errorMessageAuth, isLoadingAuth, doSignin } = useSignin()
 
   async function handleRegister() {
     await doRegister(
@@ -18,6 +21,16 @@ export const authStore = defineStore('auth', () => {
       password.value,
       passwordConfirm.value
     )
+    name.value = ''
+    email.value = ''
+    password.value = ''
+    passwordConfirm.value = ''
+  }
+
+  async function handleSignin() {
+    await doSignin(email.value, password.value)
+    email.value = ''
+    password.value = ''
   }
 
   return{
@@ -25,10 +38,14 @@ export const authStore = defineStore('auth', () => {
     email,
     password,
     passwordConfirm,
-    isError,
-    errorMessage,
-    isLoading,
+    isErrorRegister,
+    errorMessageRegister,
+    isLoadingRegister,
     handleRegister,
+    isErrorAuth,
+    errorMessageAuth,
+    isLoadingAuth,
+    handleSignin,
   }
   
 })

@@ -4,32 +4,32 @@ import { signin } from '@/features/auth/services/auth.service'
 
 export function useSignin () {
   const router = useRouter()
-  const isError = ref(false)
-  const errorMessage = ref('')
-  const isLoading = ref(false)
+  const isErrorAuth = ref(false)
+  const errorMessageAuth = ref('')
+  const isLoadingAuth = ref(false)
 
   async function doSignin (email: string, password: string) {
-    isError.value = false
+    isErrorAuth.value = false
     if (!email.trim() || !password.trim()) {
-      isError.value = true
-      errorMessage.value = 'Veuillez remplir tous les champs'
+      isErrorAuth.value = true
+      errorMessageAuth.value = 'Veuillez remplir tous les champs'
       return
     }
-    isLoading.value = true
+    isLoadingAuth.value = true
     try {
       await signin(email, password)
       router.push('/accueil')
     } catch (error: any) {
-      isError.value = true
-      errorMessage.value = error.message
+      isErrorAuth.value = true
+      errorMessageAuth.value = error.message
     } finally {
-      isLoading.value = false
+      isLoadingAuth.value = false
     }
   }
   return {
     doSignin,
-    isError,
-    errorMessage,
-    isLoading,
+    isErrorAuth,
+    errorMessageAuth,
+    isLoadingAuth,
   }
 }

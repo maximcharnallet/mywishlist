@@ -9,6 +9,7 @@
     "fastify": "^5.8.5",
     "fastify-plugin": "^6.0.0",
     "fastify-type-provider-zod": "^7.0.0",
+    "i18n": "^0.15.3",
     "postgres": "^3.4.9",
     "zod": "^4.4.3"
   },

@@ -4,14 +4,14 @@ import { responses } from '@/shared/schemas/error-response.schema'
 
 export const registerRouteSchema = {
   tags: ['auth'],
-  summary: "Inscription d'un nouvel utilisateur",
+  summary: "Register a new user",
   body: z.object({
-    name: z.string().min(1, 'Le nom est requis'),
-    email: z.string().email('L\'email est invalide').min(1, 'L\'email est requis'),
-    password: z.string().min(1, 'Le mot de passe est requis'),
-    passwordConfirm: z.string().min(1, 'La confirmation du mot de passe est requise'),
+    name: z.string().min(1, 'Name is required'),
+    email: z.string().email('Invalid email').min(1, 'Email is required'),
+    password: z.string().min(1, 'Password is required'),
+    passwordConfirm: z.string().min(1, 'Password confirmation is required'),
   }).refine((data) => data.password === data.passwordConfirm, {
-    message: 'Les mots de passe ne correspondent pas',
+    message: 'Passwords do not match',
     path: ['passwordConfirm'],
   }),
   response: {
@@ -24,5 +24,20 @@ export const registerRouteSchema = {
       }),
     }),
     ...responses(400, 409, 500),
+  },
+}
+
+export const loginRouteSchema = {
+  tags: ['auth'],
+  summary: "Login a user",
+  body: z.object({
+    email: z.string().email('Invalid email').min(1, 'Email is required'),
+    password: z.string().min(1, 'Password is required'),
+  }),
+  response: {
+    200: z.object({
+      token: z.string(),
+    }),
+    ...responses(400, 401, 500),
   },
 }
