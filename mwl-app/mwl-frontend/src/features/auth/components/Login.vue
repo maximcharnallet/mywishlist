@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import router from '@/router'
   import { useSignin } from '@/features/auth/composables/useSignin'
-  import { authStore } from '@/features/auth/store/auth.store'
+  import { authStore } from '@/features/auth/stores/auth.store'
   import { storeToRefs } from 'pinia'
 
   const store = authStore()

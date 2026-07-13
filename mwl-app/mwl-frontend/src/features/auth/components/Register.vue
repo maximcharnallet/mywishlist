@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { authStore } from '@/features/auth/store/auth.store'
+  import { authStore } from '@/features/auth/stores/auth.store'
   import { storeToRefs } from 'pinia'
 
   const store = authStore()
