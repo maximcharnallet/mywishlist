@@ -4,7 +4,7 @@
 
   const gifts = ref([
     { id: 1, name: 'Vélo de ville électrique', price: 1200, link: 'https://...', icon: 'mdi-bike' },
-    { id: 2, name: 'BD - L\'Arabe du Futur Tome 6', price: 24, link: 'https://...', icon: 'mdi-book-open-variant' },
+    { id: 2, name: 'BD - Qui veut la peau de Ramirez ? ', price: 24, link: 'https://...', icon: 'mdi-book-open-variant' },
   ])
 </script>
 

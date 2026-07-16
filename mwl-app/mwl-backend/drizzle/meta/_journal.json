@@ -22,6 +22,13 @@
       "when": 1783428752990,
       "tag": "0002_slim_wong",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1784212716975,
+      "tag": "0003_short_doorman",
+      "breakpoints": true
     }
   ]
 }

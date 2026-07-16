@@ -1,13 +1,15 @@
 import fastify from 'fastify'
 import fastifyJwt from '@fastify/jwt'
-import { authController } from './auth/controllers/auth.http'
+import { authController } from '@/auth/controllers/auth.http'
 import {
   serializerCompiler,
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
-import swaggerPlugin from './plugins/swagger'
-import dbPlugin from './plugins/db'
+import swaggerPlugin from '@/plugins/swagger'
+import dbPlugin from '@/plugins/db'
+import authenticate from '@/plugins/authenticate'
+import { giftController } from '@/gifts/controllers/gift.http'
 
 export const buildApp = () => {
   const jwtSecret = process.env.JWT_SECRET
@@ -18,6 +20,7 @@ export const buildApp = () => {
   const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>()
 
   app.register(fastifyJwt, { secret: jwtSecret })
+  app.register(authenticate)
 
   app.setValidatorCompiler(validatorCompiler)
   app.setSerializerCompiler(serializerCompiler)
@@ -26,6 +29,7 @@ export const buildApp = () => {
   app.register(dbPlugin)
   
   app.register(authController, { prefix: '/api/auth' })
+  app.register(giftController, { prefix: '/api/gifts' })
 
 
   return app

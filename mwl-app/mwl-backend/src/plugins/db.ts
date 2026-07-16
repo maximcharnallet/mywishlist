@@ -1,23 +1,13 @@
 import fp from 'fastify-plugin'
 import type { FastifyInstance } from 'fastify'
-import { drizzle } from 'drizzle-orm/bun-sql'
-import * as authSchema from '@/auth/user.db.schema'
-
-const schema = { ...authSchema,
-}
-
-function createDb() {
-  return drizzle(process.env.DATABASE_URL!, {
-    schema,
-  })
-}
+import { db } from '@/database/schema.db' 
 
 declare module 'fastify' {
   interface FastifyInstance {
-    db: ReturnType<typeof createDb>
+    db: typeof db
   }
 }
 
 export default fp(async function dbPlugin(app: FastifyInstance) {
-  app.decorate('db', createDb())
-  })
+  app.decorate('db', db)
+})

@@ -5,4 +5,6 @@ export interface UserRepository {
   findOne(email: string): Promise<User | undefined>
   findById(id: string): Promise<User | undefined>
   findMany(): Promise<User[]>
+  update(id: string, data: Partial<NewUser>): Promise<User | undefined>
+  delete(id: string): Promise<boolean>
 }
