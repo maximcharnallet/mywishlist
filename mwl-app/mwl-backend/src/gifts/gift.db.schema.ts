@@ -3,7 +3,7 @@ import { users } from '@/auth/user.db.schema'
 
 export const gifts = pgTable('gifts', {
   id: uuid('id').defaultRandom().primaryKey(),
-  titre: varchar('titre', { length: 255 }).notNull(),
+  title: varchar('title', { length: 255 }).notNull(),
   description: text('description'),
   price: integer('price'),
   userId: uuid('user_id')

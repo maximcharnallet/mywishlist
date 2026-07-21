@@ -1,11 +1,24 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { onMounted, ref } from 'vue'
+  import { giftStore } from '@/features/gifts/stores/gifts.store'
+  import { storeToRefs } from 'pinia'
+  import { useGetAllGifts } from '@/features/gifts/composables/useGetAllGifts'
+  import addGiftDialog from '@/features/gifts/components/addGiftDialog.vue'
 
+  const store = giftStore()
+  const { gifts } = storeToRefs(store)
 
-  const gifts = ref([
-    { id: 1, name: 'Vélo de ville électrique', price: 1200, link: 'https://...', icon: 'mdi-bike' },
-    { id: 2, name: 'BD - Qui veut la peau de Ramirez ? ', price: 24, link: 'https://...', icon: 'mdi-book-open-variant' },
-  ])
+  const { doGetAllGifts } = useGetAllGifts()
+
+  const dialog = ref(false)
+
+  function openDialog () {
+    dialog.value = true
+  }
+
+  onMounted(() => {
+    doGetAllGifts()
+  })
 </script>
 
 <template>
@@ -16,29 +29,20 @@
         {{ gifts.length }} cadeaux
       </v-chip>
     </div>
-
-    <!-- Liste des cadeaux -->
     <v-row dense>
       <v-col v-for="gift in gifts" :key="gift.id" cols="12">
         <v-card class="rounded-xl pa-2" elevation="1" variant="outlined" color="grey-lighten-2">
-          <template v-slot:prepend>
-            <v-avatar color="#F25C74" class="text-white">
-              <v-icon>{{ gift.icon }}</v-icon>
-            </v-avatar>
-          </template>
-          
           <v-card-item>
             <v-card-title class="text-body-1 font-weight-bold text-grey-darken-3">
-              {{ gift.name }}
+              {{ gift.title }}
             </v-card-title>
+            <v-card-text class="text-body-1 text-grey-darken-3">
+              {{ gift.description }}
+            </v-card-text>
             <v-card-subtitle class="text-subtitle-2 font-weight-medium text-secondary">
               {{ gift.price }} €
             </v-card-subtitle>
           </v-card-item>
-
-          <template v-slot:append>
-            <v-btn icon="mdi-open-in-new" variant="text" color="grey-darken-1" :href="gift.link" target="_blank"></v-btn>
-          </template>
         </v-card>
       </v-col>
     </v-row>
@@ -51,6 +55,9 @@
       position="fixed"
       class="mb-16 mr-4 text-white"
       elevation="4"
+      @click="openDialog"
     ></v-btn>
+
+    <addGiftDialog v-model="dialog" />
   </v-container>
 </template>

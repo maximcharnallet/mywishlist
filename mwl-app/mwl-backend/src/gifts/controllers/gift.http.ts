@@ -23,7 +23,7 @@ export async function giftController(app: FastifyInstance) {
   const deleteGiftUsecase = new DeleteGiftUsecase(giftRepository)
 
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/gifts',
+    '/',
     { 
       schema: createGiftHttpSchema, 
       onRequest: [app.authenticate] 
@@ -39,7 +39,7 @@ export async function giftController(app: FastifyInstance) {
   )
 
   app.withTypeProvider<ZodTypeProvider>().get(
-    '/gifts',
+    '/',
     { schema: getAllGiftsHttpSchema, onRequest: [app.authenticate] },
     async (request, reply) => {
       const userId = request.user.id
@@ -49,7 +49,7 @@ export async function giftController(app: FastifyInstance) {
   )
 
   app.withTypeProvider<ZodTypeProvider>().patch(
-    '/gifts/:id',
+    '/:id',
     { schema: updateGiftHttpSchema, onRequest: [app.authenticate] },
     async (request, reply) => {
       const userId = request.user.id
@@ -63,7 +63,7 @@ export async function giftController(app: FastifyInstance) {
   )
 
   app.withTypeProvider<ZodTypeProvider>().delete(
-    '/gifts/:id',
+    '/:id',
     { schema: deleteGiftHttpSchema, onRequest: [app.authenticate] },
     async (request, reply) => {
       const userId = request.user.id

@@ -3,12 +3,11 @@ import { responses } from '@/shared/schemas/error-response.schema'
 
 const giftResponseSchema = z.object({
   id: z.string(),
-  titre: z.string(),
+  title: z.string(),
   description: z.string().nullable(),
   price: z.number().nullable(),
   userId: z.string(),
   createdAt: z.date(),
-  updatedAt: z.date(),
 })
 
 const idParamSchema = z.object({
@@ -19,7 +18,7 @@ export const createGiftHttpSchema = {
   tags: ['gifts'],
   summary: 'Create a new gift',
   body: z.object({
-    titre: z.string().min(1, 'Le titre est requis'),
+    title: z.string().min(1, 'Le titre est requis'),
     description: z.string().optional(),
     price: z.number().positive().optional(),
   }),
@@ -44,7 +43,7 @@ export const updateGiftHttpSchema = {
   params: idParamSchema,
   body: z
     .object({
-      titre: z.string().min(1, 'Le titre est requis').optional(),
+      title: z.string().min(1, 'Le titre est requis').optional(),
       description: z.string().optional(),
       price: z.number().positive().optional(),
     })

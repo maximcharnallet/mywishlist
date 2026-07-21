@@ -2,7 +2,7 @@ import z from "zod"
 
 
 export const giftInputSchema = z.object({
-  titre: z.string().min(1, "Le titre est requis"),
+  title: z.string().min(1, "Le titre est requis"),
   description: z.string().optional(),
   price: z.number().positive().optional(),
 })

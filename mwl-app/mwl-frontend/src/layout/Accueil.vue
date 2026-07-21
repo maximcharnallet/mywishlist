@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import WishlistView from '@/features/wishlist/presentation/WishlistView.vue'
+  import GiftsView from '@/features/gifts/presentation/GiftsView.vue'
   import FriendsView from '@/features/friends/presentation/FriendsView.vue'
   import ProfilView from '@/features/profil/presentation/ProfilView.vue'
 
@@ -25,7 +25,7 @@
       <v-window v-model="currentTab" :touch="false">
         
         <v-window-item value="wishlist">
-          <WishlistView />
+          <GiftsView />
         </v-window-item>
 
         <v-window-item value="friends">

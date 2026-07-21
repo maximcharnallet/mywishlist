@@ -29,6 +29,13 @@
       "when": 1784212716975,
       "tag": "0003_short_doorman",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1784399214613,
+      "tag": "0004_useful_talon",
+      "breakpoints": true
     }
   ]
 }

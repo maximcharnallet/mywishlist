@@ -10,7 +10,7 @@ export class CreateGiftUsecase {
     this.giftRepository = giftRepository
   }
 
-  public async execute({ userId, titre, description, price }: CreateGiftParams): Promise<Gift> {
-    return await this.giftRepository.createGift({ userId, titre, description, price })
+  public async execute({ userId, title, description, price }: CreateGiftParams): Promise<Gift> {
+    return await this.giftRepository.createGift({ userId, title, description, price })
   }
 }
