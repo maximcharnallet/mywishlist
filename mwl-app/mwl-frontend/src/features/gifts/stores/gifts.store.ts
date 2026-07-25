@@ -17,6 +17,17 @@ export const giftStore = defineStore('gift', () => {
     gifts.value.push(gift)
   }
 
+  function removeGift(id: string) {
+    gifts.value = gifts.value.filter(gift => gift.id !== id)
+  }
+
+  function updateGift(gift: Gift) {
+    const index = gifts.value.findIndex(g => g.id === gift.id)
+    if (index !== -1) {
+      gifts.value[index] = gift
+    }
+  }
+
   return {
     title,
     description,
@@ -24,5 +35,7 @@ export const giftStore = defineStore('gift', () => {
     gifts,
     setGifts,
     addGift,
+    removeGift,
+    updateGift,
   }
 })

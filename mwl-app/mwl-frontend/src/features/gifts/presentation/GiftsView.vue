@@ -4,17 +4,27 @@
   import { storeToRefs } from 'pinia'
   import { useGetAllGifts } from '@/features/gifts/composables/useGetAllGifts'
   import addGiftDialog from '@/features/gifts/components/addGiftDialog.vue'
+  import { useDeleteGift } from '@/features/gifts/composables/useDeleteGift'
+  import type { Gift } from '@/features/gifts/types/gift.type'
 
   const store = giftStore()
   const { gifts } = storeToRefs(store)
 
   const { doGetAllGifts } = useGetAllGifts()
+  const { doDeleteGift } = useDeleteGift()
 
   const dialog = ref(false)
+  const selectedGift = ref<Gift | null>(null)
 
-  function openDialog () {
+  function openCreateDialog () {
+    selectedGift.value = null
     dialog.value = true
   }
+  function openEditDialog (gift: Gift) {
+    selectedGift.value = gift
+    dialog.value = true
+  }
+
 
   onMounted(() => {
     doGetAllGifts()
@@ -31,7 +41,22 @@
     </div>
     <v-row dense>
       <v-col v-for="gift in gifts" :key="gift.id" cols="12">
-        <v-card class="rounded-xl pa-2" elevation="1" variant="outlined" color="grey-lighten-2">
+        <v-card 
+          class="rounded-xl pa-2" 
+          elevation="1" 
+          variant="outlined" 
+          color="grey-lighten-2"
+          @click="openEditDialog(gift)"
+          >
+          <v-btn
+            icon="mdi-close"
+            size="x-small"
+            variant="text"
+            color="grey-darken-1"
+            class="position-absolute"
+            style="top: 8px; right: 8px; z-index: 1;"
+            @click.stop="doDeleteGift(gift.id)"
+          ></v-btn>
           <v-card-item>
             <v-card-title class="text-body-1 font-weight-bold text-grey-darken-3">
               {{ gift.title }}
@@ -55,9 +80,9 @@
       position="fixed"
       class="mb-16 mr-4 text-white"
       elevation="4"
-      @click="openDialog"
+      @click="openCreateDialog"
     ></v-btn>
 
-    <addGiftDialog v-model="dialog" />
+    <addGiftDialog v-model="dialog" :gift="selectedGift" />
   </v-container>
 </template>

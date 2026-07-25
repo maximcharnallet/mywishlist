@@ -30,12 +30,12 @@ export async function getAllGifts(): Promise<Gift[]> {
   return data
 }
 
-export async function updateGift(id: string, titre?: string, description?: string, price?: number): Promise<Gift> {
+export async function updateGift(id: string, title?: string, description?: string, price?: number): Promise<Gift> {
   const res = await fetch(`/api/gifts/${id}`, {
     method: 'PATCH',
     headers: authHeaders(),
     body: JSON.stringify({
-      titre,
+      title,
       description,
       price,
     }),
@@ -51,6 +51,7 @@ export async function deleteGift(id: string): Promise<void> {
   const res = await fetch(`/api/gifts/${id}`, {
     method: 'DELETE',
     headers: authHeaders(),
+    body: JSON.stringify({})
   })
   if (!res.ok) {
     const data = await res.json().catch(() => ({}))
