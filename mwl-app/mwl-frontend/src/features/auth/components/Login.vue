@@ -1,15 +1,16 @@
 <script setup lang="ts">
   import router from '@/router'
   import { useSignin } from '@/features/auth/composables/useSignin'
-  import { authStore } from '@/features/auth/stores/auth.store'
-  import { storeToRefs } from 'pinia'
+  import { ref } from 'vue'
 
-  const store = authStore()
-  const { email, password} = storeToRefs(store)
+  const email = ref('')
+  const password = ref('')
   const { doSignin } = useSignin()
 
   async function handleSignin(){
     await doSignin(email.value, password.value)
+    email.value = ''
+    password.value = ''
   }
 
   function toRegister() {

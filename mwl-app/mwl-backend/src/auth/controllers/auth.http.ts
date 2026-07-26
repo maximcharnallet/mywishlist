@@ -50,4 +50,5 @@ export async function authController(fastify: FastifyInstance) {
       }
     }
   )
+
 }

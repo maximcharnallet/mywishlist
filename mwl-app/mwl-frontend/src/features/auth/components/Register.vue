@@ -1,12 +1,28 @@
 <script setup lang="ts">
-  import { authStore } from '@/features/auth/stores/auth.store'
-  import { storeToRefs } from 'pinia'
+  import { ref } from 'vue'
+  import router from '@/router'
+  import { useRegister } from '@/features/auth/composables/useRegister'
 
-  const store = authStore()
-  const { name, email, password, passwordConfirm, isErrorRegister, errorMessageRegister, isLoadingRegister } = storeToRefs(store)
+
+  const name = ref('')
+  const email = ref('')
+  const password = ref('')
+  const passwordConfirm = ref('')
+
+  const { doRegister, isErrorRegister, errorMessageRegister, isLoadingRegister } = useRegister()
+
+
 
   async function handleRegister() {
-    await store.handleRegister()
+    await doRegister(name.value, email.value, password.value, passwordConfirm.value)
+    name.value = ''
+    email.value = ''
+    password.value = ''
+    passwordConfirm.value = ''
+  }
+
+  function toLogin() {
+    router.push({ name: 'login' })
   }
 
 </script>
@@ -29,7 +45,7 @@
         <v-btn color="primary" class="mt-2" block @click="handleRegister" :loading="isLoadingRegister">
           S'enregistrer
         </v-btn>
-        <a href="/login" class="mt-2 d-block text-center">Connexion</a>
+        <a href="#" class="mt-2 d-block text-center" @click.prevent="toLogin">Connexion</a>
       </v-card-text>
     </v-card>
   </v-container> 

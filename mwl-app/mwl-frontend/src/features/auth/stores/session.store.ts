@@ -1,25 +1,28 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
 export const sessionStore = defineStore('session', () => {
 
-  const id = ref('')
-  const name = ref('')
-  
-  const token = localStorage.getItem('user_token')
-  if (token) {
-    const payload = JSON.parse(atob(token.split('.')[1]))
-    console.log('PAYLOAD : ', payload)
-    
-    id.value = payload.id
-    name.value = payload.name
-    
+  function getPayload() {
+    const token = localStorage.getItem('user_token')
+    if (!token) return null
+    return JSON.parse(atob(token.split('.')[1]))
   }
 
-  return{
-    id,
-    name,
+  function getId() {
+    return getPayload()?.id ?? ''
   }
 
+  function getName() {
+    return getPayload()?.name ?? ''
+  }
+
+  function logout() {
+    localStorage.removeItem('user_token')
+  }
+
+  return {
+    getId,
+    getName,
+    logout,
+  }
 })
-  
