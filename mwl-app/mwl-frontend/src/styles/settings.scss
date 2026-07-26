@@ -1,3 +1,15 @@
-html, body, input, button, select, textarea {
-  font-family: 'Handlee';
+@font-face {
+  font-family: "Handlee";
+  src: url("@/styles/fonts/Handlee/Handlee-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body,
+input,
+button,
+select,
+textarea {
+  font-family: "Handlee", cursive;
 }
