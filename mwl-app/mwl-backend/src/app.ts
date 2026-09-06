@@ -10,6 +10,8 @@ import swaggerPlugin from '@/plugins/swagger'
 import dbPlugin from '@/plugins/db'
 import authenticate from '@/plugins/authenticate'
 import { giftController } from '@/gifts/controllers/gift.http'
+import errorHandler from '@/plugins/errorHandler'
+import { friendController } from './friends/controllers/friend.http'
 
 export const buildApp = () => {
   const jwtSecret = process.env.JWT_SECRET
@@ -27,9 +29,10 @@ export const buildApp = () => {
 
   app.register(swaggerPlugin)
   app.register(dbPlugin)
-  
+  app.register(errorHandler)
   app.register(authController, { prefix: '/api/auth' })
   app.register(giftController, { prefix: '/api/gifts' })
+  app.register(friendController, { prefix: '/api/friends' })
 
 
   return app

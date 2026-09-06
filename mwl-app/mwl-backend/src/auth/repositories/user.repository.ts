@@ -1,8 +1,11 @@
 import type { FastifyInstance } from 'fastify'
 import { eq } from 'drizzle-orm'
 import { users } from '@/auth/user.db.schema'
-import type { NewUser, User } from '@/auth/user.db.schema'
+import type { NewUser} from '@/auth/user.db.schema'
 import { UserRepository } from '@/auth/repositories/user.interface'
+import type { User } from '@/auth/user.db.schema'
+import type { UserDTO, PublicUser } from '@/auth/contracts/user.schema'
+
 
 
 export class UserRepositoryImpl implements UserRepository {
@@ -44,4 +47,5 @@ export class UserRepositoryImpl implements UserRepository {
       .returning()
     return result.length > 0
   }
+  
 }

@@ -36,6 +36,13 @@
       "when": 1784399214613,
       "tag": "0004_useful_talon",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1788621023002,
+      "tag": "0005_closed_taskmaster",
+      "breakpoints": true
     }
   ]
 }
