@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { responses } from '@/shared/schemas/error-response.schema'
 import { publicUserSchema } from '@/auth/contracts/user.schema'
+import { giftSchema } from '@/gifts/contracts/gift.schema'
 
 const friendRequestResponseSchema = z.object({
   id: z.string(),
@@ -61,5 +62,19 @@ export const listPendingFriendRequestsHttpSchema = {
   response: {
     200: z.array(pendingFriendRequestResponseSchema),
     ...responses(401, 500),
+  },
+}
+
+const friendIdParamSchema = z.object({
+  friendId: z.string().uuid('Invalid friend id'),
+})
+
+export const getFriendGiftsHttpSchema = {
+  tags: ['friends'],
+  summary: "List a friend's gifts",
+  params: friendIdParamSchema,
+  response: {
+    200: z.array(giftSchema),
+    ...responses(401, 403, 500),
   },
 }

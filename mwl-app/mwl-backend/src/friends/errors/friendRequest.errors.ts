@@ -12,3 +12,6 @@ export class FriendRequestNotFoundError extends AppError {
 export class NotAddresseeError extends AppError {
   constructor() { super("Seul le destinataire peut répondre à cette demande", 403) }
 }
+export class NotFriendError extends AppError {
+  constructor() { super("Cet utilisateur ne fait pas partie de vos amis.", 403) }
+}

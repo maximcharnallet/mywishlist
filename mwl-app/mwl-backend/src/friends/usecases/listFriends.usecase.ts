@@ -1,4 +1,3 @@
-// friends/usecases/listFriends.usecase.ts
 import type { UserRepository } from '@/auth/repositories/user.interface'
 import type { FriendRequestRepository } from '@/friends/repositories/friendRequest.interface'
 import { toPublicUser } from '@/auth/services/user.mapper'

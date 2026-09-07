@@ -11,7 +11,10 @@ import {
   respondFriendRequestHttpSchema,
   listFriendsHttpSchema,
   listPendingFriendRequestsHttpSchema,
+  getFriendGiftsHttpSchema,
 } from './friend.schema'
+import { GetFriendGiftsUseCase } from '../usecases/getFriendGifts.usecase'
+import { GiftRepositoryImpl } from '@/gifts/repositories/gift.repository'
 
 export async function friendController(app: FastifyInstance) {
   app.log.debug('Registering friend controller routes')
@@ -23,6 +26,8 @@ export async function friendController(app: FastifyInstance) {
   const respondFriendRequestUseCase = new RespondFriendRequestUseCase(friendRequestRepository)
   const listFriendsUseCase = new ListFriendsUseCase(userRepository, friendRequestRepository)
   const listPendingFriendRequestsUseCase = new ListPendingFriendRequestsUseCase(userRepository, friendRequestRepository)
+  const giftRepository = new GiftRepositoryImpl(app)
+  const getFriendGiftsUseCase = new GetFriendGiftsUseCase(friendRequestRepository, giftRepository)
 
   app.withTypeProvider<ZodTypeProvider>().post(
     '/',
@@ -64,6 +69,17 @@ export async function friendController(app: FastifyInstance) {
       const userId = request.user.id
       const pending = await listPendingFriendRequestsUseCase.execute(userId)
       return reply.status(200).send(pending)
+    },
+  )
+
+  app.withTypeProvider<ZodTypeProvider>().get(
+    '/:friendId/gifts',
+    { schema: getFriendGiftsHttpSchema, onRequest: [app.authenticate] },
+    async (request, reply) => {
+      const userId = request.user.id
+      const { friendId } = request.params
+      const gifts = await getFriendGiftsUseCase.execute(userId, friendId)
+      return reply.status(200).send(gifts)
     },
   )
 }
