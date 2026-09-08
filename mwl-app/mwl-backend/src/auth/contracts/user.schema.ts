@@ -4,6 +4,7 @@ export const userSchema = z.object({
   id: z.string(),
   name: z.string(),
   email: z.string().email(),
+  avatarColor: z.string().default('#F25C74'),
   createdAt: z.date(),
 })
 export type UserDTO = z.infer<typeof userSchema>

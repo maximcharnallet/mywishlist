@@ -43,6 +43,13 @@
       "when": 1788621023002,
       "tag": "0005_closed_taskmaster",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1788860271356,
+      "tag": "0006_uneven_white_tiger",
+      "breakpoints": true
     }
   ]
 }

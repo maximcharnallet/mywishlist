@@ -12,6 +12,7 @@ import authenticate from '@/plugins/authenticate'
 import { giftController } from '@/gifts/controllers/gift.http'
 import errorHandler from '@/plugins/errorHandler'
 import { friendController } from './friends/controllers/friend.http'
+import { userController } from './auth/controllers/user.http'
 
 export const buildApp = () => {
   const jwtSecret = process.env.JWT_SECRET
@@ -33,6 +34,7 @@ export const buildApp = () => {
   app.register(authController, { prefix: '/api/auth' })
   app.register(giftController, { prefix: '/api/gifts' })
   app.register(friendController, { prefix: '/api/friends' })
+  app.register(userController, { prefix: '/api/users' })
 
 
   return app

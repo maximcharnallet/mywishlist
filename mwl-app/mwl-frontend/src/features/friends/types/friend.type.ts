@@ -12,7 +12,7 @@ export interface FriendRequest {
 export interface Friend {
   id: string
   name: string
-  avatarUrl?: string | null
+  avatarColor: string 
   createdAt: string
 }
 

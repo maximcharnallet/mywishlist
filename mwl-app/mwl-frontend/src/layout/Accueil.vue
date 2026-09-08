@@ -1,16 +1,21 @@
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import GiftsView from '@/features/gifts/presentation/GiftsView.vue'
   import FriendsView from '@/features/friends/presentation/FriendsView.vue'
   import ProfilView from '@/features/profil/presentation/ProfilView.vue'
   import { sessionStore } from '@/features/auth/stores/session.store'
+  import { useGetMe } from '@/features/auth/composables/useGetMe'
   import { useRouter } from 'vue-router'
-  
 
   const currentTab = ref('wishlist')
 
   const session = sessionStore()
   const router = useRouter()
+  const { doGetMe } = useGetMe()
+
+  onMounted(() => {
+    doGetMe()
+  })
 
   function handleLogout() {
     session.logout()
@@ -25,7 +30,7 @@
         <div class="greeting text-truncate">
           <v-btn @click="currentTab= 'profil'">
             <v-icon size="18" class="mr-1">mdi-account-circle</v-icon>
-            <span>{{ session.getName() }}</span>
+            <span>{{ session.name }}</span>          
           </v-btn>
         </div>
 

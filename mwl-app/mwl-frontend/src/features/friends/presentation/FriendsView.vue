@@ -64,7 +64,14 @@ watch(openedFriendId, (friendId) => {
         :value="friend.id"
         class="rounded-xl mb-3 elevation-1"
       >
-        <v-expansion-panel-title>{{ friend.name }}</v-expansion-panel-title>
+        <v-expansion-panel-title>
+          <div class="d-flex align-center">
+            <v-avatar :color="friend.avatarColor" size="36" class="mr-3 text-white font-weight-bold">
+              {{ friend.name.charAt(0).toUpperCase() }}
+            </v-avatar>
+            <span>{{ friend.name }}</span>
+          </div>
+        </v-expansion-panel-title>        
         <v-expansion-panel-text>
           <friendGifts
             :friend-id="friend.id"

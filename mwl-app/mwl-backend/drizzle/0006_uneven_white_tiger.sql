@@ -1,0 +1,1 @@
+ALTER TABLE "users" ADD COLUMN "avatar_color" varchar(7) DEFAULT '#F25C74' NOT NULL;
