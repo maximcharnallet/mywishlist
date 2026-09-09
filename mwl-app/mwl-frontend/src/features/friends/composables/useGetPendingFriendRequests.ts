@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { getPendingFriendRequests } from '@/features/friends/services/friend.service'
-import { friendStore } from '@/features/friends/store/friends.store'
+import { friendStore } from '@/features/friends/stores/friends.store'
 
 export function useGetPendingFriendRequests() {
   const store = friendStore()

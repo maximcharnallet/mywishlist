@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onMounted } from 'vue'
-import { friendStore } from '@/features/friends/store/friends.store'
+import { friendStore } from '@/features/friends/stores/friends.store'
 import { storeToRefs } from 'pinia'
 import { useGetAllFriends } from '@/features/friends/composables/useGetAllFriends'
 import { useGetPendingFriendRequests } from '@/features/friends/composables/useGetPendingFriendRequests'

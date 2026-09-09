@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { friendStore } from '@/features/friends/store/friends.store'
+import { friendStore } from '@/features/friends/stores/friends.store'
 
 const props = defineProps<{
   friendId: string

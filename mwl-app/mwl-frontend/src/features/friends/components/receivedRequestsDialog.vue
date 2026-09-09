@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { friendStore } from '@/features/friends/store/friends.store'
+import { friendStore } from '@/features/friends/stores/friends.store'
 import { useRespondFriendRequest } from '@/features/friends/composables/useRespondFriendRequest'
 
 const isDialogOpen = defineModel<boolean>({ default: false })
@@ -43,7 +43,7 @@ async function handleRespond(id: string, decision: 'accepted' | 'declined') {
           <v-list-item :title="request.requester.name">
             <template v-slot:prepend>
               <v-avatar>
-                <v-img v-if="request.requester.avatarUrl" :src="request.requester.avatarUrl"></v-img>
+                <v-img v-if="request.requester.avatarColor" :src="request.requester.avatarColor"></v-img>
                 <v-icon v-else>mdi-account</v-icon>
               </v-avatar>
             </template>
