@@ -1,6 +1,6 @@
-# 🎁 MyWishlist
+# <img width="120" height="120" alt="logo" src="https://github.com/user-attachments/assets/e8edddab-1706-4165-9cc0-9f57834a392d" /> MyWishlist
 
-An app to build your own wishlist and browse your friends' — so you never buy the wrong gift again.
+### An app to build your own wishlist and browse your friends,  so you never buy the wrong gift again.
 
 ## Table of contents
 
@@ -19,12 +19,12 @@ The core idea behind MyWishlist: everyone manages their own gift wishlist, and c
 
 ## Features
 
-✅ Create, edit and delete gifts on your own wishlist
-✅ Send, receive, accept or decline friend requests
-✅ Browse a friend's gift list, once the friend request is accepted
-✅ Edit your profile (name, avatar color)
-✅ Secure authentication via JWT
-✅ API documentation via Swagger
+- Create, edit and delete gifts on your own wishlist
+- Send, receive, accept or decline friend requests
+- Browse a friend's gift list, once the friend request is accepted
+- Edit your profile (name, avatar color)
+- Secure authentication via JWT
+- API documentation via Swagger
 
 ## Tech stack
 
@@ -167,13 +167,6 @@ bun run build:frontend
 ```
 The backend has no dedicated build step yet — it runs directly via Bun (`bun run dev:backend`); add a production start script if you need one for deployment.
 
-## Contributing
-
-1. Fork the project
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -m 'feat: my feature'`)
-4. Push the branch (`git push origin feature/my-feature`)
-5. Open a Pull Request
 
 ## License
 
