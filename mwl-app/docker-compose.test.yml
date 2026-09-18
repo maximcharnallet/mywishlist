@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: wishlist_test
+    ports:
+      - "5433:5432"  
+
+  backend:
+    image: ghcr.io/maximcharnallet/mwl-backend:latest
+    environment:
+      DATABASE_URL: postgresql://test:test@db:5432/wishlist_test
+      LISTEN: 0.0.0.0:3008
+      RUN_MIGRATIONS: "true"
+    ports:
+      - "3008:3008"
+    depends_on:
+      - db
