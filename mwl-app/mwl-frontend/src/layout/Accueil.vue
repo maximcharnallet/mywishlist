@@ -8,15 +8,35 @@
   import { useRouter } from 'vue-router'
 
   const currentTab = ref('wishlist')
+  const tabOrder = ['wishlist', 'friends', 'profil']
 
   const session = sessionStore()
   const router = useRouter()
   const { doGetMe } = useGetMe()
 
+  let touchStartX = 0
+  let touchStartY = 0
+
   onMounted(() => {
     doGetMe()
   })
 
+  function handleTouchStart(e: TouchEvent) {
+    touchStartX = e.touches[0].clientX
+    touchStartY = e.touches[0].clientY
+  }
+  function handleTouchEnd(e: TouchEvent) {
+    const deltaX = e.changedTouches[0].clientX - touchStartX
+    const deltaY = e.changedTouches[0].clientY - touchStartY
+    if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) * 1.5) return
+
+    const currentIndex = tabOrder.indexOf(currentTab.value)
+    if (deltaX < 0 && currentIndex < tabOrder.length - 1) {
+      currentTab.value = tabOrder[currentIndex + 1] 
+    } else if (deltaX > 0 && currentIndex > 0) {
+      currentTab.value = tabOrder[currentIndex - 1] 
+    }
+  }
   function handleLogout() {
     session.logout()
     router.push('/login')
@@ -24,8 +44,8 @@
 </script>
 
 <template>
-  <v-layout class="bg-grey-lighten-4" style="min-height: 100vh;">
-    <v-app-bar color="#F25C74" density="compact" elevation="2">
+    <v-layout class="bg-grey-lighten-4" style="min-height: 100dvh;">    
+      <v-app-bar color="#F25C74" density="compact" elevation="2">
       <div class="app-bar-grid">
         <div class="greeting text-truncate">
           <v-btn @click="currentTab= 'profil'">
@@ -45,14 +65,21 @@
         </div>
 
         <div class="d-flex justify-end">
-          <v-btn icon @click="handleLogout">
-            <v-icon color="white">mdi-logout</v-icon>
+          <v-btn
+            variant="text"
+            density="compact"
+            color="white"
+            size="small"
+            @click="handleLogout"
+          >
+            <v-icon size="18" class="mr-1">mdi-logout</v-icon>
+            <span class="d-none d-sm-inline">Se déconnecter</span>
           </v-btn>
         </div>
       </div>
     </v-app-bar>
 
-    <v-main>
+    <v-main @touchstart="handleTouchStart" @touchend="handleTouchEnd">
       <v-window v-model="currentTab" :touch="false">
         <v-window-item value="wishlist">
           <GiftsView />
@@ -92,4 +119,9 @@
     align-items: center;
     max-width: 140px;
   }
+
+  :deep(.v-bottom-navigation) {
+  height: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
 </style>

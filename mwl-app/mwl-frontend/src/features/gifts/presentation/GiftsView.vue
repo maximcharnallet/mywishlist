@@ -78,11 +78,20 @@
       size="large"
       location="bottom right"
       position="fixed"
-      class="mb-16 mr-4 text-white"
-      elevation="4"
+      class="add-gift-btn text-white"
       @click="openCreateDialog"
     ></v-btn>
 
     <addGiftDialog v-model="dialog" :gift="selectedGift" />
   </v-container>
 </template>
+<style scoped>
+
+  .add-gift-btn {
+    position: fixed; 
+    right: 16px; 
+    bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 16px); 
+    z-index: 5;
+  }
+  
+</style>
