@@ -12,7 +12,10 @@
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "mcp": "ruler apply",
-    "mcp:revert": "ruler revert"
+    "mcp:revert": "ruler revert",
+    "docker:build": "docker build --platform linux/amd64 -t ghcr.io/maximcharnallet/mwl-frontend:latest .",
+    "docker:push": "docker push ghcr.io/maximcharnallet/mwl-frontend:latest",
+    "docker:deploy": "bun run docker:build && bun run docker:push"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.2.10",

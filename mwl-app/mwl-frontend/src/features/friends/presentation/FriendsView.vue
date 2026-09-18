@@ -47,12 +47,16 @@ watch(openedFriendId, (friendId) => {
     <div class="d-flex align-center justify-space-between mb-4">
       <h2 class="text-h5 font-weight-bold">Mes Proches 👥</h2>
       <div class="d-flex align-center">
-        <v-btn icon="mdi-bell-outline" variant="text" @click="isRequestsDialogOpen = true">
-          <v-badge v-if="receivedRequests.length" :content="receivedRequests.length" color="error" floating>
-            <v-icon>mdi-bell-outline</v-icon>
-          </v-badge>
-          <v-icon v-else>mdi-bell-outline</v-icon>
-        </v-btn>
+        <v-badge
+          v-if="receivedRequests.length"
+          :content="receivedRequests.length"
+          color="error"
+          floating
+        >
+          <v-btn icon="mdi-bell-outline" variant="text" @click="isRequestsDialogOpen = true"></v-btn>
+        </v-badge>
+        <v-btn v-else icon="mdi-bell-outline" variant="text" @click="isRequestsDialogOpen = true"></v-btn>
+
         <v-btn icon="mdi-plus" color="primary" @click="isAddDialogOpen = true"></v-btn>
       </div>
     </div>
