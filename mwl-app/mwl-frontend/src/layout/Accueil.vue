@@ -95,11 +95,20 @@
       </v-window>
     </v-main>
 
+    <v-footer app class="justify-center text-caption">
+      <router-link to="/legalmentions" class="text-medium-emphasis">Mentions légales</router-link>
+      ·
+      <router-link to="/confidentialpolicy" class="text-medium-emphasis">Politique de confidentialité</router-link>
+    </v-footer>
+
+   
+
     <v-bottom-navigation v-model="currentTab" color="primary" grow>
       <v-btn value="wishlist"><v-icon>mdi-gift</v-icon><span>Ma Liste</span></v-btn>
       <v-btn value="friends"><v-icon>mdi-account-group</v-icon><span>Mes Proches</span></v-btn>
       <v-btn value="profil"><v-icon>mdi-account</v-icon><span>Profil</span></v-btn>
     </v-bottom-navigation>
+
   </v-layout>
 </template>
 

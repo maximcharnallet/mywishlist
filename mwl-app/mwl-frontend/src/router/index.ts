@@ -3,10 +3,14 @@ import type { RouteRecordRaw } from 'vue-router'
 import Login from '@/features/auth/components/Login.vue'
 import Register from '@/features/auth/components/Register.vue'
 import Accueil from '@/layout/Accueil.vue'
+import LegalMentions from '@/features/legal/LegalMentions.vue'
+import ConfidentialPolicy from '@/features/legal/ConfidentialPolicy.vue'
 
 const publicRoutes: RouteRecordRaw[] = [
   { path: '/login', name: 'login', component: Login },
   { path: '/register', name: 'register', component: Register },
+  { path: '/legalmentions', name: 'legalmentions', component: LegalMentions },
+  { path: '/confidentialpolicy', name: 'confidentialpolicy', component: ConfidentialPolicy }
 ]
 
 const privateRoutes: RouteRecordRaw[] = [

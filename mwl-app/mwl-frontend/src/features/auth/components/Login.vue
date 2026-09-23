@@ -19,21 +19,26 @@
 </script>
 <template>
   <v-container class="d-flex align-center justify-center" style="min-height: 100vh;">
-    <v-card width="400">
-      <h1 class="text-center mt-4">
-        My Whish List
-      </h1>
-      <v-img src="/logo.png" height="150"></v-img>
-      <v-card-title class="text-center">Connexion</v-card-title>
-      <v-card-text>
-        <v-form @submit.prevent="handleSignin">
-          <v-text-field v-model="email" label="Email" type="email" required></v-text-field>
-          <v-text-field v-model="password" label="Mot de passe" type="password" required></v-text-field>
-          <v-btn type="submit" color="primary" class="mt-4" block @click="handleSignin">Se connecter</v-btn>
-        </v-form>
-        <v-btn color="primary" class="mt-2" block @click="toRegister">S'enregistrer</v-btn>
-      </v-card-text>
-    </v-card>
+    <div class="d-flex flex-column align-center">
+      <v-card width="400">
+        <h1 class="text-center mt-4">My Whish List</h1>
+        <v-img src="/logo.png" height="150"></v-img>
+        <v-card-title class="text-center">Connexion</v-card-title>
+        <v-card-text>
+          <v-form @submit.prevent="handleSignin">
+            <v-text-field v-model="email" label="Email" type="email" required></v-text-field>
+            <v-text-field v-model="password" label="Mot de passe" type="password" required></v-text-field>
+            <v-btn type="submit" color="primary" class="mt-4" block @click="handleSignin">Se connecter</v-btn>
+          </v-form>
+          <v-btn color="primary" class="mt-2" block @click="toRegister">S'enregistrer</v-btn>
+        </v-card-text>
+      </v-card>
+
+      <div class="text-caption text-medium-emphasis mt-4">
+        <router-link to="/legalmentions" class="text-medium-emphasis">Mentions légales</router-link>
+        ·
+        <router-link to="/confidentialpolicy" class="text-medium-emphasis">Politique de confidentialité</router-link>
+      </div>
+    </div>
   </v-container>
 </template>
-  
