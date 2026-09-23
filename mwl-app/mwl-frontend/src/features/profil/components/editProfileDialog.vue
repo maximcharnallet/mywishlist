@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useUpdateProfile } from '@/features/auth/composables/useUpdateProfile'
-import { sessionStore } from '@/features/auth/stores/session.store'
+  import { ref, watch } from 'vue'
+  import { useUpdateProfile } from '@/features/auth/composables/useUpdateProfile'
+  import { sessionStore } from '@/features/auth/stores/session.store'
 
-const props = defineProps<{ modelValue: boolean }>()
-const emit = defineEmits(['update:modelValue'])
+  const props = defineProps<{ modelValue: boolean }>()
+  const emit = defineEmits(['update:modelValue'])
 
-const session = sessionStore()
-const { doUpdateProfile, isLoadingUpdateProfile, isErrorUpdateProfile, errorMessageUpdateProfile } = useUpdateProfile()
+  const session = sessionStore()
+  const { doUpdateProfile, isLoadingUpdateProfile, isErrorUpdateProfile, errorMessageUpdateProfile } = useUpdateProfile()
 
-const AVATAR_COLORS = ['#F25C74', '#4C6EF5', '#12B886', '#F59F00', '#7048E8', '#E64980', '#15AABF', '#495057']
+  const AVATAR_COLORS = ['#F25C74', '#4C6EF5', '#12B886', '#F59F00', '#7048E8', '#E64980', '#15AABF', '#495057']
 
-const name = ref('')
-const avatarColor = ref('')
+  const name = ref('')
+  const avatarColor = ref('')
 
-watch(
-  () => props.modelValue,
-  (isOpen) => {
-    if (isOpen) {
-      name.value = session.name
-      avatarColor.value = session.avatarColor
-    }
-  },
-)
+  watch(
+    () => props.modelValue,
+    (isOpen) => {
+      if (isOpen) {
+        name.value = session.name
+        avatarColor.value = session.avatarColor
+      }
+    },
+  )
 
-async function handleSubmit() {
-  const success = await doUpdateProfile({ name: name.value, avatarColor: avatarColor.value })
-  if (success) emit('update:modelValue', false)
-}
+  async function handleSubmit() {
+    const success = await doUpdateProfile({ name: name.value, avatarColor: avatarColor.value })
+    if (success) emit('update:modelValue', false)
+  }
 </script>
 
 <template>

@@ -33,11 +33,18 @@
 
 <template>
   <v-container class="pa-4">
-    <div class="d-flex justify-between align-center mb-4">
-      <h2 class="text-h5 font-weight-bold color-primary">Mes envies 🎁</h2>
-      <v-chip color="#F25C74" variant="flat" class="text-white">
-        {{ gifts.length }} cadeaux
-      </v-chip>
+    <div class="d-flex align-center mb-4">
+      <h2 class="text-h5 font-weight-bold color-primary mr-2">Mes envies 🎁</h2>
+        <v-chip color="#F25C74" variant="flat" class="text-white">
+          {{ gifts.length }} cadeaux
+        </v-chip>
+        <v-btn
+          color="#F25C74"
+          icon="mdi-plus"
+          size="small"
+          class="text-white ms-auto"
+          @click="openCreateDialog"
+        ></v-btn>
     </div>
     <v-row dense>
       <v-col v-for="gift in gifts" :key="gift.id" cols="12">
@@ -72,26 +79,9 @@
       </v-col>
     </v-row>
 
-    <v-btn
-      color="#F25C74"
-      icon="mdi-plus"
-      size="large"
-      location="bottom right"
-      position="fixed"
-      class="add-gift-btn text-white"
-      @click="openCreateDialog"
-    ></v-btn>
-
     <addGiftDialog v-model="dialog" :gift="selectedGift" />
   </v-container>
 </template>
 <style scoped>
 
-  .add-gift-btn {
-    position: fixed; 
-    right: 16px; 
-    bottom: calc(56px + env(safe-area-inset-bottom, 0px) + 16px); 
-    z-index: 5;
-  }
-  
 </style>

@@ -18,3 +18,14 @@ export async function updateProfile(payload: { name?: string; avatarColor?: stri
   if (!res.ok) throw new Error(data.message || 'Une erreur est survenue')
   return data
 }
+
+export async function deleteProfile(): Promise<SessionUser> {
+  const { 'Content-Type': _contentType, ...headers } = authHeaders()
+  const res = await fetch('/api/users/me', {
+    method: 'DELETE',
+    headers,
+  })
+  const data = await res.json()
+  if (!res.ok) throw new Error(data.message || 'Une erreur est survenue')
+  return data
+}

@@ -15,7 +15,10 @@
   },
   "scripts": {
     "dev": "bun run src/index.ts",
-    "start": "bun run src/index.ts"
+    "start": "bun run src/index.ts",
+    "docker:build": "docker build --platform linux/amd64 -t ghcr.io/maximcharnallet/mwl-backend:latest .",
+    "docker:push": "docker push ghcr.io/maximcharnallet/mwl-backend:latest",
+    "docker:deploy": "bun run docker:build && bun run docker:push"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",

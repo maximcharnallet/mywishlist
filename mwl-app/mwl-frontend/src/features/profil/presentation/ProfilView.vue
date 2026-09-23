@@ -3,11 +3,12 @@ import { ref } from 'vue'
 import { sessionStore } from '@/features/auth/stores/session.store'
 import { storeToRefs } from 'pinia'
 import EditProfileDialog from '@/features/profil/components/editProfileDialog.vue'
-
+import DeleteProfileDialog from '@/features/profil/components/deleteProfileDialog.vue'
 const store = sessionStore()
 const { name, avatarColor } = storeToRefs(store)
 
 const isEditDialogOpen = ref(false)
+const isDeleteDialogOpen = ref(false)
 
 const handleLogout = () => {
   store.logout()
@@ -23,9 +24,12 @@ const handleLogout = () => {
 
     <v-card class="rounded-xl text-left mb-4" elevation="1">
       <v-list>
+        <v-list-item prepend-icon="mdi-bell" title="Notifications" link></v-list-item>
+        <v-divider inset></v-divider>
         <v-list-item prepend-icon="mdi-account-edit" title="Modifier mon profil" link @click="isEditDialogOpen = true"></v-list-item>
         <v-divider inset></v-divider>
-        <v-list-item prepend-icon="mdi-bell" title="Notifications" link></v-list-item>
+        <v-list-item prepend-icon="mdi-account-remove" title="Supprimer mon compte" base-color="error" link @click="isDeleteDialogOpen = true"></v-list-item>
+
       </v-list>
     </v-card>
 
@@ -36,5 +40,6 @@ const handleLogout = () => {
     </v-card>
 
     <EditProfileDialog v-model="isEditDialogOpen" />
+    <delete-profile-dialog v-model="isDeleteDialogOpen" />
   </v-container>
 </template>

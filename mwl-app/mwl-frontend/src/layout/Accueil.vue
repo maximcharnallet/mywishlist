@@ -44,8 +44,8 @@
 </script>
 
 <template>
-    <v-layout class="bg-grey-lighten-4" style="min-height: 100dvh;">    
-      <v-app-bar color="#F25C74" density="compact" elevation="2">
+  <v-layout class="bg-grey-lighten-4" style="min-height: 100dvh;">    
+    <v-app-bar color="#F25C74" density="compact" elevation="2">
       <div class="app-bar-grid">
         <div class="greeting text-truncate">
           <v-btn @click="currentTab= 'profil'">
@@ -96,20 +96,18 @@
     </v-main>
 
     <v-footer app class="justify-center text-caption">
-      <router-link to="/legalmentions" class="text-medium-emphasis">Mentions légales</router-link>
-      ·
-      <router-link to="/confidentialpolicy" class="text-medium-emphasis">Politique de confidentialité</router-link>
+      <router-link to="/legalmentions" class="text-small-emphasis">Mentions légales</router-link>
+      <span class="mx-2">|</span>
+      <router-link to="/confidentialpolicy" class="text-small-emphasis">Politique de confidentialité</router-link>
     </v-footer>
 
-   
-
     <v-bottom-navigation v-model="currentTab" color="primary" grow>
-      <v-btn value="wishlist"><v-icon>mdi-gift</v-icon><span>Ma Liste</span></v-btn>
-      <v-btn value="friends"><v-icon>mdi-account-group</v-icon><span>Mes Proches</span></v-btn>
-      <v-btn value="profil"><v-icon>mdi-account</v-icon><span>Profil</span></v-btn>
-    </v-bottom-navigation>
-
+      <v-btn value="wishlist"><v-icon size="26">mdi-gift</v-icon><span>Ma Liste</span></v-btn>
+      <v-btn value="friends"><v-icon size="26">mdi-account-group</v-icon><span>Mes Proches</span></v-btn>
+      <v-btn value="profil"><v-icon size="26">mdi-account</v-icon><span>Profil</span></v-btn>
+    </v-bottom-navigation>    
   </v-layout>
+
 </template>
 
 <style scoped>
@@ -130,7 +128,15 @@
   }
 
   :deep(.v-bottom-navigation) {
-  height: calc(56px + env(safe-area-inset-bottom, 0px)) !important;
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-}
+    height: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  :deep(.v-bottom-navigation .v-btn) {
+    font-size: 0.75rem;
+  }
+
+  :deep(.v-bottom-navigation .v-btn__content span) {
+    margin-top: 2px;
+  }  
 </style>

@@ -23,3 +23,12 @@ export const updateMeHttpSchema = {
     ...responses(400, 401, 404, 500),
   },
 }
+
+export const deleteMeHttpSchema = {
+  tags: ['users'],
+  summary: 'Delete the authenticated user account',
+  response: {
+    200: publicUserSchema,
+    ...responses(401, 404, 500),
+  },
+}
