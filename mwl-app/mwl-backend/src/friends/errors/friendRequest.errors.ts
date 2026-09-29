@@ -15,3 +15,6 @@ export class NotAddresseeError extends AppError {
 export class NotFriendError extends AppError {
   constructor() { super("Cet utilisateur ne fait pas partie de vos amis.", 403) }
 }
+export class UserDosentExistsError extends AppError {
+  constructor() { super("Aucun utilisateur n'existe avec cet email", 404) }
+}

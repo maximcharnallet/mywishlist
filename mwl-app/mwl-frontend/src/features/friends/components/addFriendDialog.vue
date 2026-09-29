@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useSendFriendRequest } from '@/features/friends/composables/useSendFriendRequest'
 
 const isDialogOpen = defineModel<boolean>({ default: false })
@@ -7,6 +7,7 @@ const isDialogOpen = defineModel<boolean>({ default: false })
 const emit = defineEmits<{
   (e: 'friend-added'): void
 }>()
+
 
 const addresseeEmail = ref('')
 
@@ -25,6 +26,14 @@ async function handleSendRequest() {
     emit('friend-added')
   }
 }
+
+watch(isDialogOpen, (open) => {
+  if (!open) {
+    addresseeEmail.value = ''
+    isErrorSendFriendRequest.value = false
+    errorMessageSendFriendRequest.value = ''
+  }
+})
 </script>
 
 <template>

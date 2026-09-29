@@ -44,7 +44,7 @@
           <v-text-field v-model="password" label="Mot de passe" type="password" required></v-text-field>
           <v-text-field v-model="passwordConfirm" label="Confirmer le mot de passe" type="password" required></v-text-field>
           <v-btn type="submit" color="primary" class="mt-2" block :loading="isLoadingRegister">
-            S'enregistrer
+            Créer son compte
           </v-btn>
         </v-form>
         <a href="#" class="mt-2 d-block text-center" @click.prevent="toLogin">Connexion</a>

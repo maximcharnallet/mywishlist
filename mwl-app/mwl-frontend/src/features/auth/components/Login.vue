@@ -30,7 +30,7 @@
             <v-text-field v-model="password" label="Mot de passe" type="password" required></v-text-field>
             <v-btn type="submit" color="primary" class="mt-4" block @click="handleSignin">Se connecter</v-btn>
           </v-form>
-          <v-btn color="primary" class="mt-2" block @click="toRegister">S'enregistrer</v-btn>
+          <v-btn color="primary" class="mt-2" block @click="toRegister">Créer un compte</v-btn>
         </v-card-text>
       </v-card>
 
