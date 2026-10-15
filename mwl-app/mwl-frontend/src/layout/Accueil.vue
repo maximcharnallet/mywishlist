@@ -37,6 +37,11 @@
       currentTab.value = tabOrder[currentIndex - 1] 
     }
   }
+
+  function handleRefresh() {
+    window.location.reload()
+  }
+
   function handleLogout() {
     session.logout()
     router.push('/login')
@@ -65,6 +70,17 @@
         </div>
 
         <div class="d-flex justify-end">
+          <v-btn
+            icon
+            variant="text"
+            density="compact"
+            color="white"
+            size="small"
+            class="ml-2"
+            @click="handleRefresh"
+          >
+            <v-icon size="20">mdi-refresh</v-icon>
+          </v-btn>
           <v-btn
             variant="text"
             density="compact"
