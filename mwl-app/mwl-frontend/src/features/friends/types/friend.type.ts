@@ -1,3 +1,5 @@
+import type { Gift } from "@/features/gifts/types/gift.type"
+
 export type FriendRequestStatus = 'pending' | 'accepted' | 'declined'
 
 export interface FriendRequest {
@@ -20,4 +22,9 @@ export interface PendingFriendRequest {
   id: string
   requester: Friend
   createdAt: string
+}
+
+export interface FriendGift extends Gift {
+isReserved: boolean
+reservedByMe: boolean
 }

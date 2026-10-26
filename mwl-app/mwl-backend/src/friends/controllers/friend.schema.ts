@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { responses } from '@/shared/schemas/error-response.schema'
 import { publicUserSchema } from '@/auth/contracts/user.schema'
-import { giftSchema } from '@/gifts/contracts/gift.schema'
+import { friendGiftSchema } from '@/friends/contracts/friendGift.schema'
 
 const friendRequestResponseSchema = z.object({
   id: z.string(),
@@ -74,7 +74,7 @@ export const getFriendGiftsHttpSchema = {
   summary: "List a friend's gifts",
   params: friendIdParamSchema,
   response: {
-    200: z.array(giftSchema),
+    200: z.array(friendGiftSchema),
     ...responses(401, 403, 500),
   },
 }

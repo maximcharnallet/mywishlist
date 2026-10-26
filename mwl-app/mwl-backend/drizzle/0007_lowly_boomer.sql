@@ -1,0 +1,2 @@
+ALTER TABLE "gifts" ADD COLUMN "reserved_by" uuid;--> statement-breakpoint
+ALTER TABLE "gifts" ADD CONSTRAINT "gifts_reserved_by_users_id_fk" FOREIGN KEY ("reserved_by") REFERENCES "public"."users"("id") ON DELETE set null ON UPDATE no action;

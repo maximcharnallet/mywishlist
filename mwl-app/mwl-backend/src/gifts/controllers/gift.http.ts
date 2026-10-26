@@ -11,7 +11,12 @@ import {
   updateGiftHttpSchema,
   getAllGiftsHttpSchema,
   deleteGiftHttpSchema,
+  unreserveGiftHttpSchema,
+  reserveGiftHttpSchema,
 } from './gift.schema'
+import { UnreserveGiftUsecase } from '../usecases/gift.unreserve.handler'
+import { ReserveGiftUsecase } from '../usecases/gift.reserve.handler'
+import { FriendRequestRepositoryImpl } from '@/friends/repositories/friendRequest.repository'
 
 export async function giftController(app: FastifyInstance) {
   app.log.debug('Registering gift controller routes')
@@ -21,6 +26,9 @@ export async function giftController(app: FastifyInstance) {
   const getGiftUsecase = new GetAllGiftsUsecase(giftRepository)
   const updateGiftUsecase = new UpdateGiftUsecase(giftRepository)
   const deleteGiftUsecase = new DeleteGiftUsecase(giftRepository)
+  const friendRequestRepository = new FriendRequestRepositoryImpl(app)
+  const reserveGiftUsecase = new ReserveGiftUsecase(giftRepository, friendRequestRepository)
+  const unreserveGiftUsecase = new UnreserveGiftUsecase(giftRepository)
 
   app.withTypeProvider<ZodTypeProvider>().post(
     '/',
@@ -72,6 +80,29 @@ export async function giftController(app: FastifyInstance) {
       if (!deleted) {
         return reply.status(404).send({ message: 'Gift not found' })
       }
+      return reply.status(204).send()
+    },
+  )
+
+  app.withTypeProvider<ZodTypeProvider>().post(
+    '/:id/reserve',
+    { schema: reserveGiftHttpSchema, onRequest: [app.authenticate] },
+    async (request, reply) => {
+      const userId = request.user.id
+      const { id } = request.params
+      const { friendId } = request.body
+      await reserveGiftUsecase.execute(id, friendId, userId)
+      return reply.status(204).send()
+    },
+  )
+
+  app.withTypeProvider<ZodTypeProvider>().delete(
+    '/:id/reserve',
+    { schema: unreserveGiftHttpSchema, onRequest: [app.authenticate] },
+    async (request, reply) => {
+      const userId = request.user.id
+      const { id } = request.params
+      await unreserveGiftUsecase.execute(id, userId)
       return reply.status(204).send()
     },
   )

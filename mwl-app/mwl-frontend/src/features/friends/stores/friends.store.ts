@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import type { Friend, PendingFriendRequest } from '@/features/friends/types/friend.type'
+import type { Friend, PendingFriendRequest, FriendGift } from '@/features/friends/types/friend.type'
 import type { Gift } from '@/features/gifts/types/gift.type'
 
 export const friendStore = defineStore('friend', () => {
   const friends = ref<Friend[]>([])
   const receivedRequests = ref<PendingFriendRequest[]>([])
-  const friendGiftsById = ref<Record<string, Gift[]>>({})
+  const friendGiftsById = ref<Record<string, FriendGift[]>>({})
 
   function setFriends(newFriends: Friend[]) {
     friends.value = newFriends
@@ -20,7 +20,7 @@ export const friendStore = defineStore('friend', () => {
     receivedRequests.value = receivedRequests.value.filter((r) => r.id !== id)
   }
 
-  function setFriendGifts(friendId: string, gifts: Gift[]) {
+  function setFriendGifts(friendId: string, gifts: FriendGift[]) {
     friendGiftsById.value[friendId] = gifts
   }
 

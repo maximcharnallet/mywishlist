@@ -50,6 +50,13 @@
       "when": 1788860271356,
       "tag": "0006_uneven_white_tiger",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793012914092,
+      "tag": "0007_lowly_boomer",
+      "breakpoints": true
     }
   ]
 }

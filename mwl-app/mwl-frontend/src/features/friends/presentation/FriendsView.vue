@@ -37,7 +37,7 @@ function handleFriendAccepted() {
 
 watch(openedFriendId, (friendId) => {
   if (friendId) {
-    doGetFriendGifts(friendId)
+    doGetFriendGifts(friendId, true)
   }
 })
 </script>

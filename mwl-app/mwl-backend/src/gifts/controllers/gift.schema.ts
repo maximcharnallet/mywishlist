@@ -65,3 +65,26 @@ export const deleteGiftHttpSchema = {
     ...responses(401, 404, 500),
   },
 }
+
+export const reserveGiftHttpSchema = {
+  tags: ['gifts'],
+  summary: "Reserve a friend's gift",
+  params: idParamSchema,
+  body: z.object({
+    friendId: z.string().uuid('Invalid friend id'),
+  }),
+  response: {
+    204: z.void(),
+    ...responses(400, 401, 403, 404, 409, 500),
+  },
+}
+
+export const unreserveGiftHttpSchema = {
+  tags: ['gifts'],
+  summary: 'Cancel a reservation',
+  params: idParamSchema,
+  response: {
+    204: z.void(),
+    ...responses(401, 404, 500),
+  },
+}

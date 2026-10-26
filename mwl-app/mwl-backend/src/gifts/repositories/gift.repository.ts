@@ -1,6 +1,6 @@
 import { GiftRepository } from '@/gifts/repositories/gift.interface'
 import { FastifyInstance } from 'fastify'
-import { and, desc, eq } from 'drizzle-orm'
+import { and, desc, eq, isNull } from 'drizzle-orm'
 import type { NewGift, Gift } from '@/gifts/gift.db.schema'
 import { gifts } from '@/gifts/gift.db.schema'
 
@@ -45,6 +45,24 @@ export class GiftRepositoryImpl implements GiftRepository  {
     const result = await this.db
       .delete(gifts)
       .where(and(eq(gifts.id, id), eq(gifts.userId, userId)))
+      .returning()
+    return result.length > 0
+  }
+
+  public async reserve(id: string, reservedBy: string): Promise<Gift | undefined> {
+    const [gift] = await this.db
+      .update(gifts)
+      .set({ reservedBy })
+      .where(and(eq(gifts.id, id), isNull(gifts.reservedBy)))
+      .returning()
+    return gift
+  }
+
+  public async unreserve(id: string, reservedBy: string): Promise<boolean> {
+    const result = await this.db
+      .update(gifts)
+      .set({ reservedBy: null })
+      .where(and(eq(gifts.id, id), eq(gifts.reservedBy, reservedBy)))
       .returning()
     return result.length > 0
   }

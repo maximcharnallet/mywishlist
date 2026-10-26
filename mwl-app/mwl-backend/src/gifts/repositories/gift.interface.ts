@@ -5,5 +5,7 @@ export interface GiftRepository {
   findOne(id: string, userId: string): Promise<Gift | undefined>
   findMany(userId: string): Promise<Gift[]>
   update(id:string, userId:string, data: Partial<NewGift>): Promise<Gift | undefined>
+  reserve(id: string, reservedBy: string): Promise<Gift | undefined>
+  unreserve(id: string, reservedBy: string): Promise<boolean>
   delete(id: string, userId: string): Promise<boolean>
 }
